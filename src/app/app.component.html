@@ -1,6 +1,17 @@
-<div
-  [ngxFileDropzone]="readMode"
-  accept='text/csv; charset="iso-8859-1"'
-  (fileDrop)="onFileLoad($event)">
-  Drop a file in this zone.
-</div>
+<mat-toolbar color="primary">
+  <h1>Angular File Helpers Demo</h1>
+  <span class="filler"></span>
+  <a href="https://github.com/fvilers/ngx-file-helpers" mat-button>
+    GitHub
+  </a>
+</mat-toolbar>
+
+<main class="mat-typography">
+  <div
+    class="dropzone"
+    [ngxFileDropzone]="readMode"
+    accept='text/csv; charset="iso-8859-1"'
+    (fileDrop)="onFileLoad($event)">
+    Drop a CSV file in this zone.
+  </div>
+</main>
