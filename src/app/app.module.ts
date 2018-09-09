@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FileHelpersModule } from 'ngx-file-helpers';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -11,6 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FileHelpersModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
