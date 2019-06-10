@@ -10,7 +10,7 @@
     (fileDrop)="onFileLoad($event)">
     Drop a CSV file in this zone.
   </div>
-  <button mat-flat-button color="primary" [disabled]="!transactions">Download YNAB CSV</button>
+  <button mat-flat-button color="primary" [disabled]="!transactions" (click)="download()">Download YNAB CSV</button>
 
   <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
     <ng-container matColumnDef="type">

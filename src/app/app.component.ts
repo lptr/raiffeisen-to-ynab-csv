@@ -4,6 +4,8 @@ import { ReadFile, ReadMode } from 'ngx-file-helpers';
 
 import * as Papa from 'papaparse';
 
+import { saveAs } from 'file-saver'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -56,6 +58,11 @@ export class AppComponent {
         this.transactions = transactions;
       }
     });
+  }
+
+  download() {
+    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, 'text.txt');
   }
 }
 
