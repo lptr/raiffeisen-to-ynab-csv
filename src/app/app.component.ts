@@ -90,8 +90,8 @@ function parseDate(date: string): Date {
 }
 
 function parseAmount(amount: string): number {
-  const matcher = /(-?\d+)(?:,(\d+)) (\w+)/.exec(amount);
-  let result = +matcher[1];
+  const matcher = /(-?[\d\s]+)(?:,(\d+))? (\w+)/.exec(amount);
+  let result = +(matcher[1].replace(/\s+/g, ""));
   if (matcher[2]) {
     result += +matcher[2] / 100 * Math.sign(result + 0.5);
   }
