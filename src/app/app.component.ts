@@ -61,8 +61,13 @@ export class AppComponent {
   }
 
   download() {
-    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, 'text.txt');
+    const ynabTransactions = this.transactions.map(transaction => transaction.toYnab());
+    ynabTransactions.unshift(["Date", "Payee", "Category", "Memo", "Outflow", "Inflow"]);
+    const csvText = Papa.unparse(ynabTransactions, {
+      delimiter: ",",
+    });
+    const blob = new Blob([csvText], {type: "text/csv;charset=utf-8"});
+    saveAs(blob, 'ynab-import.csv');
   }
 }
 
@@ -88,6 +93,28 @@ class Transaction {
     this.payee = row[6];
     this.note2 = row[7];
     this.note3 = row[8];
+  }
+
+  toYnab() {
+    // Date,Payee,Category,Memo,Outflow,Inflow
+    return [
+      this.valueDate.toLocaleString("en-US").split(",")[0],
+      this.payee,
+      "",
+      this.mergeNotes(),
+      this.amount < 0 ? -this.amount : "",
+      this.amount >= 0 ? this.amount : "",
+    ];
+  }
+
+  private mergeNotes() {
+    if (!this.note2 && !this.note3) {
+      return this.note1;
+    } else if (!this.note3) {
+      return this.note2;
+    } else {
+      return this.note2 + " / " + this.note3;
+    }
   }
 }
 
